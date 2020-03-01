@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="马拉车," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考博客： https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_43456058&#x2F;article&#x2F;details&#x2F;9458872  https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011469138&#x2F;article&#x2F;details&#x2F;82431327  https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40620465&#x2F;article&#x2F;details&#x2F;90183663?utm_source&#x3D;app  h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="马拉车算法(求最长回文串)">
+<meta property="og:url" content="https://blog.dreams-wj.top/2019/07/26/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/index.html">
+<meta property="og:site_name" content="HKer_YM&#39;s Blog">
+<meta property="og:description" content="参考博客： https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_43456058&#x2F;article&#x2F;details&#x2F;9458872  https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011469138&#x2F;article&#x2F;details&#x2F;82431327  https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40620465&#x2F;article&#x2F;details&#x2F;90183663?utm_source&#x3D;app  h">
+<meta property="article:published_time" content="2019-07-25T17:00:57.000Z">
+<meta property="article:modified_time" content="2020-03-01T04:04:31.618Z">
+<meta property="article:author" content="HKer_YM">
+<meta property="article:tag" content="马拉车">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.dreams-wj.top/2019/07/26/马拉车算法-求最长回文串/"/>
+
+
+
+
+
+  <title>马拉车算法(求最长回文串) | HKer_YM's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?87190f3cb3a90139ae89277d57bcbada";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HKer_YM's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.dreams-wj.top/2019/07/26/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HKer_YM">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://q1.qlogo.cn/g?b=qq&nk=252014906&s=640">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HKer_YM's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">马拉车算法(求最长回文串)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-26T01:00:57+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="参考博客："><a href="#参考博客：" class="headerlink" title="参考博客："></a>参考博客：</h3><ul>
+<li><p><a href="https://blog.csdn.net/qq_43456058/article/details/9458872" target="_blank" rel="noopener">https://blog.csdn.net/qq_43456058/article/details/9458872</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/u011469138/article/details/82431327" target="_blank" rel="noopener">https://blog.csdn.net/u011469138/article/details/82431327</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/qq_40620465/article/details/90183663?utm_source=app" target="_blank" rel="noopener">https://blog.csdn.net/qq_40620465/article/details/90183663?utm_source=app</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/grandyang/p/4475985.html" target="_blank" rel="noopener">https://www.cnblogs.com/grandyang/p/4475985.html</a></p>
+<h3 id="马拉车算法"><a href="#马拉车算法" class="headerlink" title="马拉车算法:"></a>马拉车算法:</h3></li>
+<li><p>什么是马拉车?<br>Manacher算法，又叫“马拉车”，它可以在时间复杂度和空间复杂度都是O(n)的情况下，求出一个字符串的最长回文串长度(一般用法,也可以求字符串中回文串的个数)</p>
+<ul>
+<li>第一步，重组字符串<br>例如: noon<br>重组后:$#n#o#o#n#<br>那为什么要这样做呢?</li>
+</ul>
+<p>1.首先,这样做的好处是不论原字符串是奇数还是偶数个，处理之后得到的字符串的个数都是奇数个，这样就不用分情况讨论了，而可以一起搞定。<br>2.接下来我们还需要和处理后的字符串t等长的数组p，其中 p[i] 表示以 t[i] 字符为中心的回文子串的半径，若 p[i] = 1，则该回文子串就是 t[i] 本身，那么我们来看一个简单的例子：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 1 # 2 # 2 # 1 # 2 # 2 #</span><br><span class="line">1 2 1 2 5 2 1 6 1 2 3 2 1</span><br></pre></td></tr></table></figure>
+<p> 为啥我们关心回文子串的半径呢？看上面那个例子，以中间的 ‘1’ 为中心的回文子串 “#2#2#1#2#2#” 的半径是6，而未添加#号的回文子串为 “22122”，长度是5，为半径减1。这是个普遍的规律么？我们再看看之前的那个 “#b#o#b#”，我们很容易看出来以中间的 ‘o’ 为中心的回文串的半径是4，而 “bob”的长度是3，符合规律。再来看偶数个的情况 “noon”，添加#号后的回文串为 “#n#o#o#n#”，以最中间的 ‘#’ 为中心的回文串的半径是5，而 “noon” 的长度是4，完美符合规律。所以我们只要找到了最大的半径，就知道最长的回文子串的字符个数了。只知道长度无法定位子串，我们还需要知道子串的起始位置。<br> 我们还是先来看中间的 ‘1’ 在字符串 “#1#2#2#1#2#2#” 中的位置是7，而半径是6，貌似 7-6=1，刚好就是回文子串 “22122” 在原串 “122122” 中的起始位置1。那么我们再来验证下 “bob”，”o” 在 “#b#o#b#” 中的位置是3，但是半径是4，这一减成负的了，肯定不对。所以我们应该至少把中心位置向后移动一位，才能为0啊，那么我们就需要在前面增加一个字符，这个字符不能是#号，也不能是s中可能出现的字符，所以我们暂且就用美元号$吧，毕竟是博主最爱的东西嘛。这样都不相同的话就不会改变p值了，那么末尾要不要对应的也添加呢，其实不用的，不用加的原因是字符串的结尾标识为 ‘\0’，等于默认加过了。那此时 “o” 在 “$#b#o#b#” 中的位置是4，半径是4，一减就是0了，貌似没啥问题。我们再来验证一下那个数字串，中间的 ‘1’ 在字符串 “$#1#2#2#1#2#2#” 中的位置是8，而半径是6，这一减就是2了，而我们需要的是1，所以我们要除以2。之前的 “bob” 因为相减已经是0了，除以2还是0，没有问题。再来验证一下 “noon”，中间的 ‘#’ 在字符串 “$#n#o#o#n#” 中的位置是5，半径也是5，相减并除以2还是0，完美。可以任意试试其他的例子，都是符合这个规律的，最长子串的长度是半径减1，起始位置是中间位置减去半径再除以2。(此处偷了懒,复制了其他博客!如有侵权，请联系删除!抱歉!)</p>
+<ul>
+<li>第二步，理解下面这段代码<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// id 代表中心位置， mx 代表最右边的位置</span></span><br><span class="line">p[i] = mx &gt; i ? <span class="built_in">min</span>(p[id * <span class="number">2</span> - i],mx - i):<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+看上去不是很好理解，下面开始分步讲解<br>首先对数据进行初始化，再对i进行判断，分为两种情况<br>第一种情况，i&gt;=mx,i在mx前面，直接让p[i]=1。<br>第二种情况，i&lt;mx，这时候就又有两种情况了，对p[j]和mx-i进行比较：<br>（1）p[j]&lt;=mx-i说明i的最右端还在mx里面，如上图所示，只需要让p[i]=p[j]即可。<br>（2）p[j]&gt;mx说明i的最右端大于mx了，如下图所示，所以我们需要对这两种情况再讨论一下，当p[j] &lt; mx-i的时候，表示Len[i]的长度可能不会超过mx-i，所以我们就从i的p[2*id - i]也就是p[mx-i]的地方开始匹配。当p[j] &gt; mx - i的时候，说明i位置的子串长度超过了mx，但mx以外的地方还没有遍历到，所以我们就从mx-i也就是mx的位置开始对i匹配。<br>如果p[i]+i&gt;mx，就对mx进行更新，并且将中间点id更换成i，再通过比较更新最长回文串长度，返回最大值。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>马拉车完整代码(求最长回文子串的长度):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">马拉车模板题: https://www.luogu.org/problemnew/solution/P3805</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//求最长回文串的长度</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">32000005</span>;</span><br><span class="line"><span class="keyword">int</span> hw[MAXN];</span><br><span class="line"><span class="comment">//马拉车</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Manacher</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//转换字符串</span></span><br><span class="line">    <span class="built_in">memset</span>(hw, <span class="number">0</span>, <span class="keyword">sizeof</span>(hw));</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="built_in">string</span> nowString = <span class="string">"$#"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        nowString += s[i];</span><br><span class="line">        nowString += <span class="string">"#"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//防止越界访问</span></span><br><span class="line">    len = nowString.length();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxRight = <span class="number">0</span>, mid = <span class="number">0</span>, maxAns = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//maxRight 最右边的位置 mid 中心的位置 maxAns 最长回文串的半径</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(maxRight &gt; i)&#123;</span><br><span class="line">            <span class="comment">//当中心点没超过最右边maxRight</span></span><br><span class="line">            hw[i] = <span class="built_in">min</span>(maxRight - i, hw[(mid&lt;&lt;<span class="number">1</span>) - i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//否则,就重新往外扩</span></span><br><span class="line">            hw[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果当前不是最长, 就往外扩</span></span><br><span class="line">        <span class="keyword">while</span>(nowString[i + hw[i]] == nowString[i - hw[i]])&#123;</span><br><span class="line">            ++hw[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//更新最右边的位置, 同时更新最长字串的半径</span></span><br><span class="line">        <span class="keyword">if</span>(i + hw[i] &gt; maxRight)&#123;</span><br><span class="line">            maxRight = i + hw[i];</span><br><span class="line">            mid = i;</span><br><span class="line">        &#125;</span><br><span class="line">        maxAns = <span class="built_in">max</span>(hw[i], maxAns);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最长字串的长度等于半径减1</span></span><br><span class="line">    <span class="keyword">return</span> (maxAns - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; s)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; Manacher(s) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>马拉车求最长回文串的个数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求回文串的个数</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Manacher</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//转换字符串</span></span><br><span class="line">    <span class="built_in">memset</span>(hw, <span class="number">0</span>, <span class="keyword">sizeof</span>(hw));</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="built_in">string</span> nowString = <span class="string">"$#"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        nowString += s[i];</span><br><span class="line">        nowString += <span class="string">"#"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//防止越界访问</span></span><br><span class="line">    nowString += <span class="string">"^"</span>;</span><br><span class="line">    len = nowString.length();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxRight = <span class="number">0</span>, mid = <span class="number">0</span>, maxAns = <span class="number">0</span>, numAns = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//maxRight 最右边的位置 mid 中心的位置 maxAns 最长回文串的半径</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(maxRight &gt; i)&#123;</span><br><span class="line">            <span class="comment">//当中心点没超过最右边maxRight</span></span><br><span class="line">            hw[i] = <span class="built_in">min</span>(maxRight - i, hw[(mid&lt;&lt;<span class="number">1</span>) - i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//否则,就重新往外扩</span></span><br><span class="line">            hw[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果当前不是最长, 就往外扩</span></span><br><span class="line">        <span class="keyword">while</span>(nowString[i + hw[i]] == nowString[i - hw[i]])&#123;</span><br><span class="line">            ++hw[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//更新最右边的位置, 同时更新最长字串的半径</span></span><br><span class="line">        <span class="keyword">if</span>(i + hw[i] &gt; maxRight)&#123;</span><br><span class="line">            maxRight = i + hw[i];</span><br><span class="line">            mid = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//求最长回文串的长度</span></span><br><span class="line">        <span class="comment">//maxAns = max(hw[i], maxAns);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//求回文串的个数</span></span><br><span class="line">        numAns += (hw[i] / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最长字串的长度等于半径减1</span></span><br><span class="line">    <span class="comment">//return (maxAns - 1);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//回文串的个数</span></span><br><span class="line">    <span class="keyword">return</span> numAns;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们来探讨下为什么是:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求回文串的个数</span></span><br><span class="line">numAns += (hw[i] / <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>例如:<br>#a#b#a#<br>1 2 1 4 1 2 1<br>这已经给出了每个字符所能延伸的半径, 例如b为4,因为这之内的所有字符都是以b字符为中心对称,又因为字符串中加入了#字符,所以以b字符为中心点的回文串个数为hw[b的下标] / 2</p>
+</li>
+<li><p>求最长回文串</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求最长回文串</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="built_in">string</span> <span class="title">Manacher</span><span class="params">(<span class="built_in">string</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//转换字符串</span></span><br><span class="line">    <span class="built_in">memset</span>(hw, <span class="number">0</span>, <span class="keyword">sizeof</span>(hw));</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="built_in">string</span> nowString = <span class="string">"$#"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        nowString += s[i];</span><br><span class="line">        nowString += <span class="string">"#"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//防止越界访问</span></span><br><span class="line">    nowString += <span class="string">"^"</span>;</span><br><span class="line">    len = nowString.length();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxRight = <span class="number">0</span>, mid = <span class="number">0</span>, maxLen = <span class="number">0</span>, maxPoint = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//maxRight 最右边的位置 mid 中心的位置 maxAns 最长回文串的半径</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(maxRight &gt; i)&#123;</span><br><span class="line">            <span class="comment">//当中心点没超过最右边maxRight</span></span><br><span class="line">            hw[i] = <span class="built_in">min</span>(maxRight - i, hw[(mid&lt;&lt;<span class="number">1</span>) - i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//否则,就重新往外扩</span></span><br><span class="line">            hw[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果当前不是最长, 就往外扩</span></span><br><span class="line">        <span class="keyword">while</span>(nowString[i + hw[i]] == nowString[i - hw[i]])&#123;</span><br><span class="line">            ++hw[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//更新最右边的位置, 同时更新最长字串的半径</span></span><br><span class="line">        <span class="keyword">if</span>(i + hw[i] &gt; maxRight)&#123;</span><br><span class="line">            maxRight = i + hw[i];</span><br><span class="line">            mid = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(hw[i] &gt; maxLen)&#123;</span><br><span class="line">            maxLen = hw[i];</span><br><span class="line">            maxPoint = i;   <span class="comment">//最长回文串的中心位置</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//截取最长回文串</span></span><br><span class="line">    <span class="comment">//这里为啥这样写,在本博客前文已经提到过: 1. 第一步,重组字符串</span></span><br><span class="line">    <span class="keyword">return</span> s.substr((maxPoint - maxLen) / <span class="number">2</span>, maxLen - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="后续再补上一些例题-以及求字符串中所有的回文串个数-最长的回文串"><a href="#后续再补上一些例题-以及求字符串中所有的回文串个数-最长的回文串" class="headerlink" title="后续再补上一些例题,以及求字符串中所有的回文串个数,最长的回文串!"></a>后续再补上一些例题,以及求字符串中所有的回文串个数,最长的回文串!</h3></li>
+</ul>
+<p>2019.07.26, 已经将基本的马拉车算法应用补上.</p>
+<h3 id="待补题-杭电6599"><a href="#待补题-杭电6599" class="headerlink" title="待补题: 杭电6599"></a>待补题: 杭电6599</h3><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6599" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6599</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+        
+            
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>马拉车算法(求最长回文串)</a></p>
+  <p><span>文章作者:</span>HKer_YM</a></p>
+  <p><span>发布时间:</span>2019年07月26日 - 01:00:57</p>
+  <p><span>最后更新:</span>2020年03月01日 - 12:04:31</p>
+  <p><span>原始链接:</span><a href="/2019/07/26/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/" title="马拉车算法(求最长回文串)">https://blog.dreams-wj.top/2019/07/26/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://blog.dreams-wj.top/2019/07/26/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+        
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%A9%AC%E6%8B%89%E8%BD%A6/" rel="tag"># 马拉车</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/10/%E4%B8%AD%E7%BC%80%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B9%B6%E8%AE%A1%E7%AE%97/" rel="next" title="中缀转后缀表达式并计算">
+                <i class="fa fa-chevron-left"></i> 中缀转后缀表达式并计算
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/2019%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A5-%E7%AC%AC%E4%B8%80%E5%9C%BA%E5%9C%BA-A%E9%A2%98Equivalent-Prefixes/" rel="prev" title="2019牛客暑期多校训练营(第一场场)_A题Equivalent Prefixes">
+                2019牛客暑期多校训练营(第一场场)_A题Equivalent Prefixes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://q1.qlogo.cn/g?b=qq&nk=252014906&s=640"
+                alt="HKer_YM" />
+            
+              <p class="site-author-name" itemprop="name">HKer_YM</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreams-wj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:252014906@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.loongten.com/" title="keacwu" target="_blank">keacwu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chen.oinsm.com/" title="ChenZIDu" target="_blank">ChenZIDu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考博客："><span class="nav-number">1.</span> <span class="nav-text">参考博客：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#马拉车算法"><span class="nav-number">2.</span> <span class="nav-text">马拉车算法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后续再补上一些例题-以及求字符串中所有的回文串个数-最长的回文串"><span class="nav-number">3.</span> <span class="nav-text">后续再补上一些例题,以及求字符串中所有的回文串个数,最长的回文串!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#待补题-杭电6599"><span class="nav-number">4.</span> <span class="nav-text">待补题: 杭电6599</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HKer_YM</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
