@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>牛客练习赛59-B牛能和小镇</title>
+    <url>/2020/03/18/%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B59-B%E7%89%9B%E8%83%BD%E5%92%8C%E5%B0%8F%E9%95%87/</url>
+    <content><![CDATA[<h3 id="题目链接-https-ac-nowcoder-com-acm-contest-4743-B"><a href="#题目链接-https-ac-nowcoder-com-acm-contest-4743-B" class="headerlink" title="题目链接: https://ac.nowcoder.com/acm/contest/4743/B"></a>题目链接: <a href="https://ac.nowcoder.com/acm/contest/4743/B" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/4743/B</a></h3><p><img src="https://img-blog.csdnimg.cn/20200318202831816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hLZXJfWU0=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目读完应该可以晓得这是一道最小生成树的题目，模板题！！作为鲁莽型选手，必定得莽一莽！(QAQ… 内存超限了…<br>好，没事，还有机会！首先我们分析一下，2点建路的代价为:<img src="https://img-blog.csdnimg.cn/20200318203118856.png" alt="在这里插入图片描述"><br>我们设X 为<br><img src="https://img-blog.csdnimg.cn/20200318203318994.png" alt="在这里插入图片描述"><br>那么 两点的代价就是| X1 - X2|<br>然后要任意两点联通，那么对于n个点，我们只需n-1条边即可</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul>
+<li>鲁莽型代码</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="comment">//typedef pair&lt;int, int&gt; pri;</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;ll, ll&gt; prl;</span><br><span class="line"><span class="keyword">int</span> vis[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    ll val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findx</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = x, tmp, r;</span><br><span class="line">    <span class="keyword">while</span>(vis[k] != k) &#123;</span><br><span class="line">        k = vis[k];</span><br><span class="line">    &#125;</span><br><span class="line">    r = k, k = x;</span><br><span class="line">    <span class="keyword">while</span>(vis[k] != k) &#123;</span><br><span class="line">        tmp = vis[k];</span><br><span class="line">        vis[k] = r;</span><br><span class="line">        k = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">marge</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = findx(a);</span><br><span class="line">    <span class="keyword">int</span> y = findx(b);</span><br><span class="line">    <span class="keyword">if</span>(vis[x] != y) &#123;</span><br><span class="line">        vis[x] = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">getVal</span><span class="params">(<span class="keyword">int</span> x1, <span class="keyword">int</span> y1, <span class="keyword">int</span> x2, <span class="keyword">int</span> y2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>((x1 * x1 * y1 - x2 * x2 * y2 + y1 * y1 * (y1 - <span class="number">2</span> * x1) - y2 * y2 * (y2 - <span class="number">2</span> * x2)));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.val &lt; b.val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) vis[i] = i;</span><br><span class="line">        <span class="built_in">vector</span>&lt;node&gt; ve;</span><br><span class="line">        <span class="built_in">vector</span>&lt;prl&gt; nodes;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            ll a, b;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            nodes.emplace_back(a, b);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                ve.push_back(node&#123;i, j, getVal(nodes[i].first, nodes[i].second, nodes[j].first, nodes[j].second)&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(ve.begin(), ve.end(), cmp);</span><br><span class="line">        ll sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(findx(ve[now].x) != findx(ve[now].y)) &#123;</span><br><span class="line">                sum += ve[now].val;</span><br><span class="line">                marge(ve[now].x, ve[now].y);</span><br><span class="line">                n--;</span><br><span class="line">            &#125;</span><br><span class="line">            now++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>思考型</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pri;</span><br><span class="line"><span class="comment">//typedef pair&lt;ll, ll&gt; prl;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;ll&gt; ve;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            ll a, b;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            ve.push_back(a * a * b + b * b * (b - <span class="number">2</span> * a));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(ve.begin(), ve.end());</span><br><span class="line">        ll sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += ve[i] - ve[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>牛客</category>
+      </categories>
+      <tags>
+        <tag>最小生成树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ZJYYCOJ-会移动的盒子</title>
     <url>/2020/03/16/ZJYYCOJ-%E4%BC%9A%E7%A7%BB%E5%8A%A8%E7%9A%84%E7%9B%92%E5%AD%90/</url>
     <content><![CDATA[<h3 id="题目链接-http-acm-oinsm-com-problem-php-cid-1031-amp-pid-4"><a href="#题目链接-http-acm-oinsm-com-problem-php-cid-1031-amp-pid-4" class="headerlink" title="题目链接: http://acm.oinsm.com/problem.php?cid=1031&amp;pid=4"></a>题目链接: <a href="http://acm.oinsm.com/problem.php?cid=1031&pid=4" target="_blank" rel="noopener">http://acm.oinsm.com/problem.php?cid=1031&amp;pid=4</a></h3><p><img src="https://img-blog.csdnimg.cn/20200316005316362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hLZXJfWU0=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -291,8 +315,8 @@
         <category>ZJYYCOJ</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>并查集</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -336,8 +360,8 @@
         <category>ZJYYCOJ</category>
       </categories>
       <tags>
-        <tag>BFS</tag>
         <tag>DFS</tag>
+        <tag>BFS</tag>
       </tags>
   </entry>
   <entry>
@@ -654,8 +678,8 @@
       </categories>
       <tags>
         <tag>牛客</tag>
-        <tag>DP</tag>
         <tag>线段树</tag>
+        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
